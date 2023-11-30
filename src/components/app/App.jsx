@@ -1,59 +1,49 @@
 import React, { Component } from "react";
-import logo from "./logo.svg";
+import Todos from "../todos/Todos";
 import "./App.css";
 
 class App extends Component {
   constructor() {
     super();
     this.name = "App Component";
+    this.state = {
+      name: "App Component",
+      version: "1.0.0",
+    };
+    this.handleNameUpdate = this.handleNameUpdate.bind(this);
+    this.handlePropertyUpdate = this.handlePropertyUpdate.bind(this);
+  }
+
+  handlePropertyUpdate() {
+    this.name = "Updated name";
+  }
+
+  handleNameUpdate() {
+    this.setState({ name: "App updated name" });
   }
 
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <h2>{this.name}</h2>
-          {false ? <span>Hello</span> : <div>World</div>}
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <button onClick={this.functionDef}>Click Me!</button>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React and it is a fun UI lib
-          </a>
-        </header>
+        <p>{this.name}</p>
+        <p>{this.state.name}</p>
+        <p>{this.state.version}</p>
+        <button onClick={this.handlePropertyUpdate}>
+          Update class property
+        </button>
+        <button onClick={this.handleNameUpdate}>Update name state</button>
+        <Todos />
       </div>
     );
   }
 }
 
-/* function App() {
-  const name = 'App Component';
-  return (
-    <div className="App">
-      <header className="App-header">
-        <h2>{name}</h2>
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React and it is a fun UI lib
-        </a>
-      </header>
-    </div>
-  );
-} */
+// function App() {
+//   return (
+//     <div className="App">
+//       <Todos />
+//     </div>
+//   );
+// }
 
 export default App;
