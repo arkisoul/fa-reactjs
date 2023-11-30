@@ -25,7 +25,11 @@ function Todos() {
       <h1>Todos</h1>
       <ul>
         {todos.map((todo) => (
-          <TodoItem title={todo.title} onTodoDelete={handleTodoDelete} />
+          <TodoItem
+            key={todo.id}
+            title={todo.title}
+            onTodoDelete={handleTodoDelete}
+          />
         ))}
       </ul>
       <button onClick={handleAddTodo}>Add new todo</button>
