@@ -1,0 +1,14 @@
+.todos {
+  margin-top: 10rem;
+  max-width: 35rem;
+  margin-inline: auto;
+  box-shadow: 
+  0 10px 0px rgba(219, 219, 219, 0.45),
+  0 6px 0px rgba(219, 219, 219, 0.35),
+  0 2px 0px rgba(219, 219, 219, 0.2);
+}
+.heading {
+  text-align: center;
+  font-size: 3rem;
+  margin: 0 0 0.5em;
+}

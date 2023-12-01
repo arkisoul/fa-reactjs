@@ -73,8 +73,10 @@ export class AddTodo extends React.Component {
   render() {
     return (
       <form action="">
-        <div>
-          <label htmlFor="">Todo Title</label>
+        <div className="form-group">
+          <label htmlFor="title" className="sr-only">
+            Todo Title
+          </label>
           <input
             type="text"
             placeholder="What would you like to do today?"
@@ -82,10 +84,13 @@ export class AddTodo extends React.Component {
             ref={this.titleRef}
             value={this.state.title}
             onChange={this.handleTitleChange}
+            className="form-control"
           />
-        </div>
-        <div>
-          <button type="submit" onClick={this.handleFormSubmit}>
+          <button
+            className="btn btn-primary"
+            type="submit"
+            onClick={this.handleFormSubmit}
+          >
             Add
           </button>
         </div>
