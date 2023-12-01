@@ -1,17 +1,18 @@
 import React, { useState } from "react";
 import { TodoItem } from "../todo-item/TodoItem";
+import { AddTodo } from "../add-todo/AddTodo";
 
 function Todos() {
   const [todos, setTodos] = useState([]);
-  const [count, setCount] = useState(0);
+  const [showAddTodoForm, setShowAddTodoForm] = useState(false);
 
-  const handleAddTodo = () => {
+  const handleAddTodo = (title) => {
     const updatedTodos = [...todos];
     updatedTodos.push({
-      id: 4,
-      title: "Learn Nodejs",
+      id: todos.length + 1,
+      title: title,
       isCompleted: false,
-      createdAt: "2023-11-30 10:14:00Z",
+      createdAt: Date.now(),
     });
     setTodos(updatedTodos);
   };
@@ -20,9 +21,15 @@ function Todos() {
     console.log("handleTodoDelete");
   };
 
+  const toggleAddTodoFrom = () => {
+    setShowAddTodoForm(!showAddTodoForm);
+  };
+
   return (
     <div className="todos">
       <h1>Todos</h1>
+      <button onClick={toggleAddTodoFrom}>Add Todo</button>
+      {showAddTodoForm ? <AddTodo onAddTodo={handleAddTodo} /> : null}
       <ul>
         {todos.map((todo) => (
           <TodoItem
@@ -32,12 +39,6 @@ function Todos() {
           />
         ))}
       </ul>
-      <button onClick={handleAddTodo}>Add new todo</button>
-      <div className="counter">
-        <button onClick={() => setCount(count + 1)}>Inc</button>
-        <span className="count">{count}</span>
-        <button onClick={() => setCount(count - 1)}>Dec</button>
-      </div>
     </div>
   );
 }
