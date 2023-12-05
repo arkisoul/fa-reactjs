@@ -10,6 +10,9 @@
   font-size: 0.875rem;
   flex: 1 1 100%;
 }
+.todo-item > span.completed {
+  text-decoration: line-through;
+}
 .todo-item > label {
   padding: 1em 0.75em;
 }

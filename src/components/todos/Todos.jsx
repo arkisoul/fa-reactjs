@@ -1,10 +1,30 @@
-import React, { useState } from "react";
+import React, {
+  useState,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useMemo,
+  useCallback,
+} from "react";
 import { TodoItem } from "../todo-item/TodoItem";
 import { AddTodo } from "../add-todo/AddTodo";
+import { TodosContext } from "./TodosContext";
 import "./Todos.css";
 
 function Todos() {
   const [todos, setTodos] = useState([]);
+  const [count, setCount] = useState(0);
+  const compRef = useRef();
+
+  useEffect(() => {
+    console.log("[Todos] useEffect cb", compRef.current);
+    // compRef.current = setInterval(() => {}, 1000);
+    return () => {
+      console.log("[Todos] useEffect cb return fn");
+    };
+  }, [count]); // componentDidMount, componentDidUpdate, componentWillUnmount
+
+  useLayoutEffect(() => {}, []);
 
   const handleAddTodo = (title) => {
     const updatedTodos = [...todos];
@@ -30,20 +50,40 @@ function Todos() {
     );
   };
 
+  const memoValue = useMemo(() => {
+    const value = count * 2;
+    return value;
+  }, [count]);
+
+  const memoCb = useCallback(() => {}, []);
+
   return (
     <div className="todos">
-      <h1 className="heading">Todos</h1>
-      <AddTodo onAddTodo={handleAddTodo} />
-      <ul className="todos-list">
-        {todos.map((todo) => (
-          <TodoItem
-            key={todo.id}
-            todo={todo}
-            handleDelete={onHandleDelete}
-            handleStatusChange={onStatusChange}
-          />
-        ))}
-      </ul>
+      <TodosContext.Provider
+        value={{
+          todos: todos,
+          setTodos: setTodos,
+        }}
+      >
+        {console.log("[Todos] Render")}
+        <h1 className="heading">Todos</h1>
+        <AddTodo onAddTodo={handleAddTodo} />
+        <ul className="todos-list">
+          {todos.map((todo) => (
+            <TodoItem
+              key={todo.id}
+              todo={todo}
+              handleDelete={onHandleDelete}
+              handleStatusChange={onStatusChange}
+              ref={compRef}
+            />
+          ))}
+        </ul>
+        {memoValue}
+        <button onClick={() => setCount(count + 1)}>
+          Update count {count}
+        </button>
+      </TodosContext.Provider>
     </div>
   );
 }

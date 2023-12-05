@@ -2,7 +2,7 @@ import React from "react";
 
 export class AddTodo extends React.Component {
   constructor() {
-    console.log("constructor");
+    // console.log("constructor");
     super();
     this.state = {
       title: "",
@@ -52,11 +52,11 @@ export class AddTodo extends React.Component {
     e.preventDefault();
     // const title = document.getElementById("title");
     // console.log(title.value);
-    console.log(
-      this.titleRef.current,
-      this.titleRef.current.value,
-      this.state.title
-    );
+    // console.log(
+    //   this.titleRef.current,
+    //   this.titleRef.current.value,
+    //   this.state.title
+    // );
     this.props.onAddTodo(this.state.title);
     this.setState({
       title: "",
@@ -64,7 +64,7 @@ export class AddTodo extends React.Component {
   };
 
   handleTitleChange = (e) => {
-    console.log(e.target.value);
+    // console.log(e.target.value);
     this.setState({
       title: e.target.value,
     });
