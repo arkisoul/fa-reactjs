@@ -49,3 +49,9 @@ Nice to have features
 - using `ref` prop can be assigned to a html element and gives back the reference to that dom element
 - using `ref` prop on a class component gives access to that class component instance
 - using `ref` prop on a fun component along with wraping that functional component in `forwardRef` call gives the opportunity to access a HTML element in child component from it's parent.
+
+## React Router DOM
+
+- Routers
+- Routes
+- Navs
