@@ -1,4 +1,5 @@
 import React, { forwardRef, useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { TodosContext } from "../todos/TodosContext";
 import "./TodoItem.css";
 
@@ -7,7 +8,11 @@ export const TodoItem = forwardRef(function TodoItem(
   inputRef
 ) {
   const todosContextData = useContext(TodosContext);
+  const navigate = useNavigate();
   console.log("using Hook", todosContextData);
+  const handleTodoClick = () => {
+    navigate(`/todos/${todo.id}`);
+  };
   return (
     <TodosContext.Consumer>
       {(data) => {
@@ -24,7 +29,11 @@ export const TodoItem = forwardRef(function TodoItem(
                 ref={inputRef}
               />
             </label>
-            <span className={todo.isCompleted ? "completed" : ""}>
+            <span
+              className={todo.isCompleted ? "completed" : ""}
+              onClick={handleTodoClick}
+            >
+              {/* <Link to={`/todos/${todo.id}`}>{todo.title}</Link> */}
               {todo.title}
             </span>
             <button

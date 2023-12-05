@@ -94,3 +94,6 @@ ul, ol {
   outline: none;
   transform: scale(0.95);
 }
+.text-red {
+  color: tomato;
+}

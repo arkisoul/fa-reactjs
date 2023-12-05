@@ -1,0 +1,14 @@
+.layout {
+  display: grid;
+  grid-template-rows: 54px 1fr 60px;
+  grid-template-areas:
+    "h h h h h h h h"
+    "m m m m m m s s"
+    "f f f f f f f f";
+  min-height: 100vh;
+}
+.content {
+  grid-area: m;
+  padding: 2rem 1rem;
+  background-color: aliceblue;
+}

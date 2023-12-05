@@ -1,13 +1,14 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import logo from "../../../logo.svg";
+import "./Navbar.css";
 
 export function Navbar() {
   return (
     <header className="header">
       <nav className="navbar">
         <NavLink to="/">
-          <img src={logo} alt="App Logo" />
+          <img className="logo" src={logo} alt="App Logo" />
         </NavLink>
         <menu className="nav">
           <li>
