@@ -15,7 +15,8 @@ export const RequestService = {
   post: (endpoint, data, headers = {}) => {
     return makeRequest(endpoint, {
       headers: {
-        ...headers
+        'Content-type': 'application/json',
+        ...headers,
       },
       body: JSON.stringify(data),
       method: 'POST',
@@ -32,6 +33,7 @@ export const RequestService = {
   put: (endpoint, data, headers = {}) => {
     return makeRequest(endpoint, {
       headers: {
+        'Content-type': 'application/json',
         ...headers
       },
       body: JSON.stringify(data),

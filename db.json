@@ -2,10 +2,40 @@
   "users": [],
   "todos": [
     {
-      "id": 1,
       "title": "Learn Reactjs",
+      "isCompleted": true,
+      "createdAt": "2023-12-06T06:44:28.768Z",
+      "id": 1
+    },
+    {
+      "title": "Learn Nodejs",
       "isCompleted": false,
-      "createdAt": "2023-12-06 11:00:00Z"
+      "createdAt": "2023-12-06T06:44:31.987Z",
+      "id": 2
+    },
+    {
+      "title": "Learn JavaScript",
+      "isCompleted": false,
+      "createdAt": "2023-12-06T06:44:37.264Z",
+      "id": 3
+    },
+    {
+      "title": "Learn HTML",
+      "isCompleted": false,
+      "createdAt": "2023-12-06T06:44:39.469Z",
+      "id": 4
+    },
+    {
+      "title": "Learn CSS",
+      "isCompleted": false,
+      "createdAt": "2023-12-06T06:44:41.357Z",
+      "id": 5
+    },
+    {
+      "title": "Learn Full stack development",
+      "isCompleted": false,
+      "createdAt": "2023-12-06T06:45:00.128Z",
+      "id": 7
     }
   ]
 }

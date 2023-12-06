@@ -1,6 +1,7 @@
 import React, { forwardRef, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { TodosContext } from "../todos/TodosContext";
+import { formatDate } from "../../shared/utils/utils";
 import "./TodoItem.css";
 
 export const TodoItem = forwardRef(function TodoItem(
@@ -35,6 +36,7 @@ export const TodoItem = forwardRef(function TodoItem(
             >
               {/* <Link to={`/todos/${todo.id}`}>{todo.title}</Link> */}
               {todo.title}
+              <small className="todo-date">{formatDate(todo.createdAt)}</small>
             </span>
             <button
               className="btn btn-danger"
