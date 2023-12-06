@@ -9,6 +9,7 @@ import React, {
 import { TodoItem } from "../todo-item/TodoItem";
 import { AddTodo } from "../add-todo/AddTodo";
 import { TodosContext } from "./TodosContext";
+import { TodosService } from "../../services/TodosService";
 import "./Todos.css";
 
 function Todos() {
@@ -23,6 +24,29 @@ function Todos() {
       console.log("[Todos] useEffect cb return fn");
     };
   }, [count]); // componentDidMount, componentDidUpdate, componentWillUnmount
+
+  const fetchTodos = async () => {
+    try {
+      const data = await TodosService.fetchAllTodos();
+      setTodos(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    // fetch("http://localhost:4000/todos")
+    //   .then((res) => {
+    //     console.log("fetch API response object", res);
+    //     return res.json();
+    //   })
+    //   .then((data) => {
+    //     console.log("fetch API response", data);
+    //   })
+    //   .catch((error) => console.error(error));
+
+    fetchTodos();
+  }, []);
 
   useLayoutEffect(() => {}, []);
 
