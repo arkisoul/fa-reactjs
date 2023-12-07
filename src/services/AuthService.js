@@ -4,6 +4,8 @@ export const AuthService = {
   login: (user) => {
     return RequestService.post('login', user);
   },
-  logout: () => { },
+  logout: () => {
+    localStorage.clear();
+  },
   register: (user) => { return RequestService.post('register', user) },
 }

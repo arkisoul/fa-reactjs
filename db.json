@@ -1,5 +1,21 @@
 {
-  "users": [],
+  "users": [
+    {
+      "email": "john.doe@mailinator.com",
+      "password": "$2a$10$x9cnTeMHMDGBhV6gVB1kFepiUs/GYdYFCPVk7z/LNxRV3qI6WjpCO",
+      "id": 1
+    },
+    {
+      "email": "jane.doe@mailinator.com",
+      "password": "$2a$10$jXZyJsl1oIIGKRXc5RDpWu59FDc88wjOnQ2kdf84/cm0uiK/LNd3G",
+      "id": 2
+    },
+    {
+      "email": "jonas.doe@mailinator.com",
+      "password": "$2a$10$k87gGGQvbo9YuURtLZQJb.HE8ATgQjRD6ZFwD9iVhKwoVSELYz05O",
+      "id": 3
+    }
+  ],
   "todos": [
     {
       "title": "Learn Reactjs",

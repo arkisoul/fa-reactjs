@@ -109,3 +109,7 @@ ul, ol {
   display: flex;
   justify-content: center;
 }
+button:disabled {
+  cursor: not-allowed;
+  background-color: #bdbdbd;
+}
