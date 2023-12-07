@@ -1,14 +1,34 @@
-const baseUrl = `http://localhost:4000`;
+import axios from "axios";
+import { Environment } from "../environment";
+
+const baseUrl = Environment.baseAPIEndpoint;
+
+const axiosInstance = axios.create({
+  baseURL: baseUrl,
+});
+
+axiosInstance.interceptors.request.use((config) => {
+  const authToken = localStorage.getItem('authToken');
+  if (authToken) {
+    config.headers.Authorization = `Bearer ${authToken}`
+  }
+  return config;
+})
+
+axios.interceptors.response.use((axiosResponse) => {
+  return axiosResponse
+})
 
 const makeRequest = async (endpoint, options = {}) => {
   let url;
   if (endpoint.startsWith('http') || endpoint.startsWith('https')) {
     url = endpoint;
   } else {
-    url = `${baseUrl}/${endpoint}`;
+    // url = `${baseUrl}/${endpoint}`;
+    url = `${endpoint}`;
   }
-  const res = await fetch(url, options)
-  return res.json();
+  const res = await axiosInstance(url, options);
+  return res.data;
 }
 
 export const RequestService = {
@@ -18,7 +38,7 @@ export const RequestService = {
         'Content-type': 'application/json',
         ...headers,
       },
-      body: JSON.stringify(data),
+      data: JSON.stringify(data),
       method: 'POST',
     })
   },
@@ -36,7 +56,7 @@ export const RequestService = {
         'Content-type': 'application/json',
         ...headers
       },
-      body: JSON.stringify(data),
+      data: JSON.stringify(data),
       method: 'PUT',
     })
   },

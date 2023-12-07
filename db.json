@@ -9,13 +9,13 @@
     },
     {
       "title": "Learn Nodejs",
-      "isCompleted": false,
+      "isCompleted": true,
       "createdAt": "2023-12-06T06:44:31.987Z",
       "id": 2
     },
     {
       "title": "Learn JavaScript",
-      "isCompleted": false,
+      "isCompleted": true,
       "createdAt": "2023-12-06T06:44:37.264Z",
       "id": 3
     },
@@ -26,16 +26,16 @@
       "id": 4
     },
     {
-      "title": "Learn CSS",
-      "isCompleted": false,
-      "createdAt": "2023-12-06T06:44:41.357Z",
-      "id": 5
-    },
-    {
       "title": "Learn Full stack development",
       "isCompleted": false,
       "createdAt": "2023-12-06T06:45:00.128Z",
       "id": 7
+    },
+    {
+      "title": "Learn CSS",
+      "isCompleted": false,
+      "createdAt": "2023-12-07T04:50:45.107Z",
+      "id": 8
     }
   ]
 }
