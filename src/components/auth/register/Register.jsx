@@ -1,18 +1,51 @@
-import React, { useState } from "react";
+import React, { useReducer } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthService } from "../../../services/AuthService";
 import { Validators } from "../../../shared/utils/validators";
 
+const initialState = {
+  email: "",
+  password: "",
+  errors: {
+    email: "",
+    password: "",
+  },
+  isAuthenticated: false,
+};
+
+const ActionTypes = {
+  EMAIL: "EMAIL",
+  PASSWORD: "PASSWORD",
+  ERRORS: "ERRORS",
+};
+
+const emailAction = (value) => {
+  return {
+    type: ActionTypes.EMAIL,
+    payload: value,
+  };
+};
+
+const reducer = (state = initialState, action) => {
+  switch (action.type) {
+    case ActionTypes.EMAIL:
+      return { ...state, email: action.payload };
+    case ActionTypes.PASSWORD:
+      return { ...state, password: action.payload };
+    case ActionTypes.ERRORS:
+      return { ...state, errors: { ...state.errors, ...action.payload } };
+    default:
+      return state;
+  }
+};
+
 export function Register() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState({ email: {}, password: {} });
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [state, dispatch] = useReducer(reducer, initialState);
   const navigate = useNavigate();
+  const { email, password, errors } = state;
 
   const handleEmailChange = (e) => {
     const value = e.target.value;
-    setEmail(value);
     const emailError = {};
     if (!Validators.email(value)) {
       emailError.email = "Invlaid email";
@@ -20,17 +53,18 @@ export function Register() {
     if (!Validators.required(value)) {
       emailError.required = "Email is required";
     }
-    setErrors({ ...errors, email: emailError });
+    dispatch(emailAction(value));
+    dispatch({ type: ActionTypes.ERRORS, payload: { email: emailError } });
   };
 
   const handlePasswordChange = (e) => {
     const value = e.target.value;
-    setPassword(value);
     const passError = {};
     if (!Validators.required(value)) {
       passError.required = "Password is required";
     }
-    setErrors({ ...errors, password: passError });
+    dispatch({ type: ActionTypes.PASSWORD, payload: value });
+    dispatch({ type: ActionTypes.ERRORS, payload: { password: passError } });
   };
 
   const handleRegister = async (e) => {

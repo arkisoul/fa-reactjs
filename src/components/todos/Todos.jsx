@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import { TodoItem } from "../todo-item/TodoItem";
 import { AddTodo } from "../add-todo/AddTodo";
 import { TodosContext } from "./TodosContext";
@@ -9,18 +9,18 @@ function Todos() {
   const [todos, setTodos] = useState([]);
   const compRef = useRef();
 
-  const fetchTodos = async () => {
+  const fetchTodos = useCallback(async () => {
     try {
       const data = await TodosService.fetchAllTodos();
       setTodos(data);
     } catch (error) {
       console.error(error);
     }
-  };
+  }, []);
 
   useEffect(() => {
     fetchTodos();
-  }, []);
+  }, [fetchTodos]);
 
   const handleAddTodo = async (title) => {
     try {

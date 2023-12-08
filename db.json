@@ -14,6 +14,11 @@
       "email": "jonas.doe@mailinator.com",
       "password": "$2a$10$k87gGGQvbo9YuURtLZQJb.HE8ATgQjRD6ZFwD9iVhKwoVSELYz05O",
       "id": 3
+    },
+    {
+      "email": "john.doe1@mailinator.com",
+      "password": "$2a$10$TK/S6BQxzMZ2CVxoNhQDm.W2uomwng1zIRBBs2Qw1T0Mw2o0ot0Am",
+      "id": 4
     }
   ],
   "todos": [

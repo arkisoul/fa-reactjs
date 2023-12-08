@@ -55,3 +55,17 @@ Nice to have features
 - Routers
 - Routes
 - Navs
+
+## External State Management Library
+
+- Redux
+- Recoil
+- Mobx
+
+## Redux
+
+Redux is based on flux concept.
+UI/Component -> Events -> Dispatched (Actions) -> Reducers -> State (store) -> UI/Component
+
+- react-redux
+  `npm install react-redux redux-toolkit`
