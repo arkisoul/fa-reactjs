@@ -1,7 +1,13 @@
 import React, { useReducer } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { AuthService } from "../../../services/AuthService";
 import { Validators } from "../../../shared/utils/validators";
+import {
+  startRegister,
+  successRegister,
+  failureRegister,
+} from "../../../app/auth/auth";
 
 const initialState = {
   email: "",
@@ -42,6 +48,7 @@ const reducer = (state = initialState, action) => {
 export function Register() {
   const [state, dispatch] = useReducer(reducer, initialState);
   const navigate = useNavigate();
+  const reduxDispatch = useDispatch();
   const { email, password, errors } = state;
 
   const handleEmailChange = (e) => {
@@ -78,12 +85,15 @@ export function Register() {
     }
 
     try {
+      reduxDispatch(startRegister());
       const res = await AuthService.register({ email, password });
       const { accessToken, user } = res;
+      reduxDispatch(successRegister({ user: user }));
       localStorage.setItem("authToken", accessToken);
       localStorage.setItem("user", JSON.stringify(user));
       navigate("/todos");
     } catch (error) {
+      reduxDispatch(failureRegister({ error }));
       console.error(error);
     }
   };
