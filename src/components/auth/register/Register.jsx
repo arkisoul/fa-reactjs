@@ -1,102 +1,15 @@
-import React, { useReducer } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import React from "react";
+import { Link } from "react-router-dom";
+import { AuthHoc } from "../../../shared/hoc/auth.hoc";
 import { AuthService } from "../../../services/AuthService";
-import { Validators } from "../../../shared/utils/validators";
-import {
-  startRegister,
-  successRegister,
-  failureRegister,
-} from "../../../app/auth/auth";
 
-const initialState = {
-  email: "",
-  password: "",
-  errors: {
-    email: "",
-    password: "",
-  },
-  isAuthenticated: false,
-};
-
-const ActionTypes = {
-  EMAIL: "EMAIL",
-  PASSWORD: "PASSWORD",
-  ERRORS: "ERRORS",
-};
-
-const emailAction = (value) => {
-  return {
-    type: ActionTypes.EMAIL,
-    payload: value,
-  };
-};
-
-const reducer = (state = initialState, action) => {
-  switch (action.type) {
-    case ActionTypes.EMAIL:
-      return { ...state, email: action.payload };
-    case ActionTypes.PASSWORD:
-      return { ...state, password: action.payload };
-    case ActionTypes.ERRORS:
-      return { ...state, errors: { ...state.errors, ...action.payload } };
-    default:
-      return state;
-  }
-};
-
-export function Register() {
-  const [state, dispatch] = useReducer(reducer, initialState);
-  const navigate = useNavigate();
-  const reduxDispatch = useDispatch();
-  const { email, password, errors } = state;
-
-  const handleEmailChange = (e) => {
-    const value = e.target.value;
-    const emailError = {};
-    if (!Validators.email(value)) {
-      emailError.email = "Invlaid email";
-    }
-    if (!Validators.required(value)) {
-      emailError.required = "Email is required";
-    }
-    dispatch(emailAction(value));
-    dispatch({ type: ActionTypes.ERRORS, payload: { email: emailError } });
-  };
-
-  const handlePasswordChange = (e) => {
-    const value = e.target.value;
-    const passError = {};
-    if (!Validators.required(value)) {
-      passError.required = "Password is required";
-    }
-    dispatch({ type: ActionTypes.PASSWORD, payload: value });
-    dispatch({ type: ActionTypes.ERRORS, payload: { password: passError } });
-  };
-
-  const handleRegister = async (e) => {
-    e.preventDefault();
-    if (
-      errors.email.required ||
-      errors.email.email ||
-      errors.password.required
-    ) {
-      return;
-    }
-
-    try {
-      reduxDispatch(startRegister());
-      const res = await AuthService.register({ email, password });
-      const { accessToken, user } = res;
-      reduxDispatch(successRegister({ user: user }));
-      localStorage.setItem("authToken", accessToken);
-      localStorage.setItem("user", JSON.stringify(user));
-      navigate("/todos");
-    } catch (error) {
-      reduxDispatch(failureRegister({ error }));
-      console.error(error);
-    }
-  };
+function RegisterComponent({
+  handleEmailChange,
+  handlePasswordChange,
+  handleAuthSubmit,
+  authState,
+}) {
+  const { user, errors } = authState;
 
   return (
     <div className="auth auth-register space">
@@ -113,7 +26,7 @@ export function Register() {
             id="email"
             name="email"
             autoComplete="false"
-            value={email}
+            value={user.email}
             onChange={handleEmailChange}
           />
           {errors.email.required ? (
@@ -134,7 +47,7 @@ export function Register() {
             id="password"
             name="password"
             autoComplete="false"
-            value={password}
+            value={user.password}
             onChange={handlePasswordChange}
           />
           {errors.password.required ? (
@@ -150,7 +63,7 @@ export function Register() {
               errors.email.email ||
               errors.password.required
             }
-            onClick={handleRegister}
+            onClick={handleAuthSubmit}
           >
             Register
           </button>
@@ -164,3 +77,5 @@ export function Register() {
     </div>
   );
 }
+
+export const Register = AuthHoc(RegisterComponent, AuthService.register);

@@ -69,3 +69,5 @@ UI/Component -> Events -> Dispatched (Actions) -> Reducers -> State (store) -> U
 
 - react-redux
   `npm install react-redux redux-toolkit`
+
+- High Order Component (HoC)

@@ -5,7 +5,6 @@ import { Sidebar } from "./sidebar/Sidebar";
 import "./LayoutMain.css";
 
 export function LayoutMain({ children }) {
-  console.log(children);
   return (
     <div className="layout app-layout">
       <Navbar />

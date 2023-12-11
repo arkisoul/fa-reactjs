@@ -1,48 +1,15 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React from "react";
+import { Link } from "react-router-dom";
+import { AuthHoc } from "../../../shared/hoc/auth.hoc";
 import { AuthService } from "../../../services/AuthService";
-import { Validators } from "../../../shared/utils/validators";
 
-export function Login() {
-  const [user, setUser] = useState({ email: "", password: "" });
-  const [errors, setErrors] = useState({ email: {}, password: {} });
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const navigate = useNavigate();
-
-  const handleUserChange = (e) => {
-    const id = e.target.id;
-    const value = e.target.value;
-    setUser({ ...user, [id]: value });
-    const userError = {};
-    if (id === "email" && !Validators.email(value)) {
-      userError.email = true;
-    }
-    if (!Validators.required(value)) {
-      userError.required = true;
-    }
-    setErrors({ ...errors, [id]: userError });
-  };
-
-  const handleLogin = async (e) => {
-    e.preventDefault();
-    if (
-      errors.email.required ||
-      errors.email.email ||
-      errors.password.required
-    ) {
-      return;
-    }
-
-    try {
-      const res = await AuthService.login(user);
-      const { accessToken, user: userDetails } = res;
-      localStorage.setItem("authToken", accessToken);
-      localStorage.setItem("user", JSON.stringify(userDetails));
-      navigate("/todos");
-    } catch (error) {
-      console.error(error);
-    }
-  };
+function LoginComponent({
+  handleEmailChange,
+  handlePasswordChange,
+  handleAuthSubmit,
+  authState,
+}) {
+  const { user, errors } = authState;
 
   return (
     <div className="auth auth-login space">
@@ -60,7 +27,7 @@ export function Login() {
             name="email"
             autoComplete="false"
             value={user.email}
-            onChange={handleUserChange}
+            onChange={handleEmailChange}
           />
           {errors.email.required ? (
             <small className="form-error">{errors.email.required}</small>
@@ -81,7 +48,7 @@ export function Login() {
             name="password"
             autoComplete="false"
             value={user.password}
-            onChange={handleUserChange}
+            onChange={handlePasswordChange}
           />
           {errors.password.required ? (
             <small className="form-error">{errors.password.required}</small>
@@ -96,7 +63,7 @@ export function Login() {
               errors.email.email ||
               errors.password.required
             }
-            onClick={handleLogin}
+            onClick={handleAuthSubmit}
           >
             Login
           </button>
@@ -110,3 +77,5 @@ export function Login() {
     </div>
   );
 }
+
+export const Login = AuthHoc(LoginComponent, AuthService.login);
