@@ -28,8 +28,13 @@ const authSlice = createSlice({
       state.isAuthenticated = false;
       state.user = null;
     },
+    logout: (state) => {
+      state.error = null;
+      state.user = null;
+      state.isAuthenticated = false;
+    }
   }
 });
 
 export const authReducer = authSlice.reducer;
-export const { startRegister, successRegister, failureRegister } = authSlice.actions;
+export const { startRegister, successRegister, failureRegister, logout } = authSlice.actions;

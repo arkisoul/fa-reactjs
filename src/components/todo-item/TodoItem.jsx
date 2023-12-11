@@ -1,4 +1,4 @@
-import React, { forwardRef, useContext } from "react";
+import React, { forwardRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { TodosContext } from "../todos/TodosContext";
 import { formatDate } from "../../shared/utils/utils";
@@ -8,23 +8,21 @@ export const TodoItem = forwardRef(function TodoItem(
   { todo, handleDelete, handleStatusChange },
   inputRef
 ) {
-  const todosContextData = useContext(TodosContext);
+  // const todosContextData = useContext(TodosContext);
   const navigate = useNavigate();
-  console.log("using Hook", todosContextData);
   const handleTodoClick = () => {
     navigate(`/todos/${todo.id}`);
   };
   return (
     <TodosContext.Consumer>
       {(data) => {
-        console.log(data);
         return (
           <li className="todo-item">
-            <label htmlFor="status">
+            <label htmlFor={`status-${todo.id}`}>
               <input
                 type="checkbox"
                 name="status"
-                id="status"
+                id={`status-${todo.id}`}
                 checked={todo.isCompleted}
                 onChange={(e) => handleStatusChange(todo.id, e.target.checked)}
                 ref={inputRef}

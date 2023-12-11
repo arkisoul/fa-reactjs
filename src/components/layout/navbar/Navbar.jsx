@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import logo from "../../../logo.svg";
 import "./Navbar.css";
 
-export function Navbar() {
+export function Navbar({ isAuthenticated }) {
   return (
     <header className="header">
       <nav className="navbar">
@@ -14,15 +14,20 @@ export function Navbar() {
           <li>
             <NavLink to="/">Home</NavLink>
           </li>
-          <li>
-            <NavLink to="/todos">Todos</NavLink>
-          </li>
-          <li>
-            <NavLink to="/login">Login</NavLink>
-          </li>
-          <li>
-            <NavLink to="/logout">Logout</NavLink>
-          </li>
+          {isAuthenticated ? (
+            <React.Fragment>
+              <li>
+                <NavLink to="/todos">Todos</NavLink>
+              </li>
+              <li>
+                <NavLink to="/logout">Logout</NavLink>
+              </li>
+            </React.Fragment>
+          ) : (
+            <li>
+              <NavLink to="/login">Login</NavLink>
+            </li>
+          )}
         </menu>
       </nav>
     </header>
