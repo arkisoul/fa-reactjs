@@ -16,28 +16,24 @@ class AppComponent extends Component {
 
   render() {
     return (
-      <div className="App">
-        <div className="container">
-          <LayoutMain isAuthenticated={this.props.isAuthenticated}>
-            <Routes>
-              {this.props.isAuthenticated ? (
-                <React.Fragment>
-                  <Route path="/todos/:todoId" element={<TodoDetails />} />
-                  <Route path="/todos" element={<Todos />} />
-                  <Route path="/logout" element={<Logout />} />
-                </React.Fragment>
-              ) : (
-                <React.Fragment>
-                  <Route path="/login" element={<Login />} />
-                  <Route path="/register" element={<Register />} />
-                </React.Fragment>
-              )}
-              <Route path="/" element={<h1>Home Component</h1>} />
-              <Route path="*" element={<h1>404 Page</h1>} />
-            </Routes>
-          </LayoutMain>
-        </div>
-      </div>
+      <LayoutMain isAuthenticated={this.props.isAuthenticated}>
+        <Routes>
+          {this.props.isAuthenticated ? (
+            <React.Fragment>
+              <Route path="/todos/:todoId" element={<TodoDetails />} />
+              <Route path="/todos" element={<Todos />} />
+              <Route path="/logout" element={<Logout />} />
+            </React.Fragment>
+          ) : (
+            <React.Fragment>
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+            </React.Fragment>
+          )}
+          <Route path="/" element={<h1>Home Component</h1>} />
+          <Route path="*" element={<h1>404 Page</h1>} />
+        </Routes>
+      </LayoutMain>
     );
   }
 }
