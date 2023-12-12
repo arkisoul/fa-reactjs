@@ -1,14 +1,17 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import React, { useEffect, useRef, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { TodoItem } from "../todo-item/TodoItem";
 import { AddTodo } from "../add-todo/AddTodo";
 import { TodosContext } from "./TodosContext";
-import { TodosService } from "../../services/TodosService";
-import { fetchTodoList } from "../../app/todo/todo";
+import {
+  fetchTodoList,
+  createATodo,
+  updateATodo,
+  deleteATodo,
+} from "../../app/todo/todo";
 import "./Todos.css";
 
 function Todos() {
-  const [todos, setTodos] = useState([]);
   const compRef = useRef();
   const dispatch = useDispatch();
   const todoState = useSelector((state) => state.todo);
@@ -22,39 +25,23 @@ function Todos() {
   }, [fetchTodos]);
 
   const handleAddTodo = async (title) => {
-    try {
-      const newTodo = await TodosService.createATodo({
+    dispatch(
+      createATodo({
         title,
         isCompleted: false,
         createdAt: new Date().toISOString(),
-      });
-      setTodos([...todos, newTodo]);
-    } catch (error) {
-      console.error(error);
-    }
+      })
+    );
   };
 
   const onHandleDelete = async (id) => {
-    try {
-      await TodosService.deleteATodoById(id);
-      setTodos(todos.filter((todo) => todo.id !== id));
-    } catch (error) {
-      console.error(error);
-    }
+    dispatch(deleteATodo(id));
   };
 
   const onStatusChange = async (id, status) => {
-    try {
-      const todoExists = todos.find((todo) => todo.id === id);
-      if (todoExists) {
-        await TodosService.updateATodoById(id, {
-          ...todoExists,
-          isCompleted: status,
-        });
-        fetchTodos();
-      }
-    } catch (error) {
-      console.error(error);
+    const todoExists = todoState.todos.find((todo) => todo.id === id);
+    if (todoExists) {
+      dispatch(updateATodo({ ...todoExists, isCompleted: status }));
     }
   };
 
@@ -62,8 +49,7 @@ function Todos() {
     <div className="todos">
       <TodosContext.Provider
         value={{
-          todos: todos,
-          setTodos: setTodos,
+          todos: todoState.todos,
         }}
       >
         <h1 className="heading">Todos</h1>

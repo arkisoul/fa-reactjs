@@ -1,6 +1,6 @@
 .sidebar {
-  grid-area: s;
   padding: 2rem 1rem;
   text-align: center;
   background-color: azure;
+  flex: 1 0 20%;
 }

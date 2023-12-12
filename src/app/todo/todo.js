@@ -25,12 +25,24 @@ const todoSlice = createSlice({
       state.isFetching = false;
       state.error = action.payload.error;
       state.todos = []
+    },
+    addNewTodo: (state, action) => {
+      state.todos.push(action.payload.todo);
+    },
+    updateTodo: (state, action) => {
+      state.todos = state.todos.map(todo => {
+        if (todo.id === action.payload.todo.id) return action.payload.todo;
+        return todo
+      })
+    },
+    deleteTodo: (state, action) => {
+      state.todos = state.todos.filter(todo => todo.id !== action.payload.todoId)
     }
   }
 })
 
 export const todoReducer = todoSlice.reducer;
-export const { startTodosList, successTodoList, failureTodoList } = todoSlice.actions;
+const { startTodosList, successTodoList, failureTodoList, addNewTodo, updateTodo, deleteTodo } = todoSlice.actions;
 
 export const fetchTodoList = () => async (dispatch) => {
   try {
@@ -39,5 +51,32 @@ export const fetchTodoList = () => async (dispatch) => {
     dispatch(successTodoList({ todos }));
   } catch (error) {
     dispatch(failureTodoList({ error }));
+  }
+}
+
+export const createATodo = (todo) => async (dispatch) => {
+  try {
+    const newTodo = await TodosService.createATodo(todo);
+    dispatch(addNewTodo({ todo: newTodo }))
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export const updateATodo = (todo) => async (dispatch) => {
+  try {
+    const updatedTodo = await TodosService.updateATodoById(todo.id, todo);
+    dispatch(updateTodo({ todo: updatedTodo }));
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export const deleteATodo = (todoId) => async (dispatch) => {
+  try {
+    await TodosService.deleteATodoById(todoId);
+    dispatch(deleteTodo({ todoId }));
+  } catch (error) {
+    console.error(error);
   }
 }

@@ -78,10 +78,10 @@
       "id": 7
     },
     {
-      "title": "Learn CSS",
-      "isCompleted": false,
-      "createdAt": "2023-12-07T04:50:45.107Z",
-      "id": 8
+      "title": "Learn Angular",
+      "isCompleted": true,
+      "createdAt": "2023-12-12T07:28:12.146Z",
+      "id": 10
     }
   ]
 }

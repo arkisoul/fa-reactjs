@@ -120,3 +120,12 @@ button:disabled {
   cursor: not-allowed;
   background-color: #bdbdbd;
 }
+.flex {
+  display: flex;
+}
+.flex-row {
+  flex-direction: row;
+}
+.h-100 {
+  height: 100%;
+}
