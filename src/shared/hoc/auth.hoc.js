@@ -1,13 +1,8 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import React, { useReducer } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import { Validators } from "../utils/validators";
-import {
-  startRegister,
-  successRegister,
-  failureRegister,
-} from "../../app/auth/auth";
+import { useNavigate } from "react-router-dom";
 
 const initialState = {
   user: {
@@ -53,11 +48,11 @@ const reducer = (state = initialState, action) => {
   }
 };
 
-export const AuthHoc = (Component, AuthServiceCall) => {
+export const AuthHoc = (Component, authAction) => {
   return () => {
     const [state, dispatch] = useReducer(reducer, initialState);
-    const navigate = useNavigate();
     const reduxDispatch = useDispatch();
+    const navigate = useNavigate();
     const { user, errors } = state;
 
     const handleAuthSubmit = async (e) => {
@@ -70,18 +65,7 @@ export const AuthHoc = (Component, AuthServiceCall) => {
         return;
       }
 
-      try {
-        reduxDispatch(startRegister());
-        const res = await AuthServiceCall(user);
-        const { accessToken, user: userDetails } = res;
-        reduxDispatch(successRegister({ user: userDetails }));
-        localStorage.setItem("authToken", accessToken);
-        localStorage.setItem("user", JSON.stringify(userDetails));
-        navigate("/todos");
-      } catch (error) {
-        reduxDispatch(failureRegister({ error }));
-        console.error(error);
-      }
+      reduxDispatch(authAction(user, navigate));
     };
 
     const handleEmailChange = (e) => {

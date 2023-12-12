@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { AuthHoc } from "../../../shared/hoc/auth.hoc";
-import { AuthService } from "../../../services/AuthService";
+import { registerUser } from "../../../app/auth/auth";
 
 function RegisterComponent({
   handleEmailChange,
@@ -78,4 +78,4 @@ function RegisterComponent({
   );
 }
 
-export const Register = AuthHoc(RegisterComponent, AuthService.register);
+export const Register = AuthHoc(RegisterComponent, registerUser);

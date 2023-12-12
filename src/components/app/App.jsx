@@ -56,4 +56,5 @@ const mapStateToProps = (state) => ({
 
 const connectedApp = connect(mapStateToProps, null);
 const App = connectedApp(AppComponent);
+// const App = connect(mapStateToProps, null)(AppComponent);
 export default App;

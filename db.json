@@ -34,6 +34,16 @@
       "email": "john.doe8@mailinator.com",
       "password": "$2a$10$ZFLj/0fmVYh4HoG05udG8.0kp843MYxbCn0JteWbyHah5HNzAcdRO",
       "id": 7
+    },
+    {
+      "email": "john.doe10@mailinator.com",
+      "password": "$2a$10$223wOxwdxZIPzWgQJLOD4O//GUMw2SxT7hO05P.ye8jycI5CEIUK.",
+      "id": 8
+    },
+    {
+      "email": "john.doe11@mailinator.com",
+      "password": "$2a$10$4pOYDJqZtIawtsEXyM4Fge8ljEgnNO33kMXz9Lam7rTjVtXNwLvM.",
+      "id": 9
     }
   ],
   "todos": [
