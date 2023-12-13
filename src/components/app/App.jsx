@@ -1,13 +1,15 @@
-import React, { Component } from "react";
+import React, { Component, lazy, Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
 import { connect } from "react-redux";
 import { LayoutMain } from "../layout/LayoutMain";
-import { TodoDetails } from "../todo-details/TodoDetails";
-import Todos from "../todos/Todos";
-import { Login } from "../auth/login/Login";
-import { Register } from "../auth/register/Register";
+// import Todos from "../todos/Todos";
 import { Logout } from "../auth/logout/Logout";
 import "./App.css";
+
+const Login = lazy(() => import("../auth/login/Login"));
+const Register = lazy(() => import("../auth/register/Register"));
+const TodoDetails = lazy(() => import("../todo-details/TodoDetails"));
+const Todos = lazy(() => import("../todos/Todos"));
 
 class AppComponent extends Component {
   constructor(props) {
@@ -17,22 +19,24 @@ class AppComponent extends Component {
   render() {
     return (
       <LayoutMain isAuthenticated={this.props.isAuthenticated}>
-        <Routes>
-          {this.props.isAuthenticated ? (
-            <React.Fragment>
-              <Route path="/todos/:todoId" element={<TodoDetails />} />
-              <Route path="/todos" element={<Todos />} />
-              <Route path="/logout" element={<Logout />} />
-            </React.Fragment>
-          ) : (
-            <React.Fragment>
-              <Route path="/login" element={<Login />} />
-              <Route path="/register" element={<Register />} />
-            </React.Fragment>
-          )}
-          <Route path="/" element={<h1>Home Component</h1>} />
-          <Route path="*" element={<h1>404 Page</h1>} />
-        </Routes>
+        <Suspense fallback={<h1>Loading...</h1>}>
+          <Routes>
+            {this.props.isAuthenticated ? (
+              <React.Fragment>
+                <Route path="/todos/:todoId" element={<TodoDetails />} />
+                <Route path="/todos" element={<Todos />} />
+                <Route path="/logout" element={<Logout />} />
+              </React.Fragment>
+            ) : (
+              <React.Fragment>
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
+              </React.Fragment>
+            )}
+            <Route path="/" element={<h1>Home Component</h1>} />
+            <Route path="*" element={<h1>404 Page</h1>} />
+          </Routes>
+        </Suspense>
       </LayoutMain>
     );
   }

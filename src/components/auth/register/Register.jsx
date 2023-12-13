@@ -78,4 +78,5 @@ function RegisterComponent({
   );
 }
 
-export const Register = AuthHoc(RegisterComponent, registerUser);
+const Register = AuthHoc(RegisterComponent, registerUser);
+export default Register;

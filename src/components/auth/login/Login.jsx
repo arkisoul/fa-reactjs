@@ -78,4 +78,5 @@ function LoginComponent({
   );
 }
 
-export const Login = AuthHoc(LoginComponent, loginUser);
+const Login = AuthHoc(LoginComponent, loginUser);
+export default Login;

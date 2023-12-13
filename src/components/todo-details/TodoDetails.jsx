@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { TodoItem } from "../todo-item/TodoItem";
 
-export function TodoDetails() {
+export default function TodoDetails() {
   const [todo, setTodo] = useState(null);
   const { todoId } = useParams();
 
