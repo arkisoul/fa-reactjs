@@ -81,7 +81,8 @@ describe("Login", () => {
   it("should trigger handleAuthSubmit on click of Login button", () => {
     renderLogin();
     const submitBtn = screen.getByRole("button");
-    fireEvent.click(submitBtn, { preventDefault: jest.fn() });
+    mockProps.handleAuthSubmit.mockImplementation((e) => e.preventDefault());
+    fireEvent.click(submitBtn);
     expect(mockProps.handleAuthSubmit).toHaveBeenCalledTimes(1);
   });
 

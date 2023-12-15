@@ -3,6 +3,10 @@ import { screen, render } from '../../shared/utils/test-utils';
 import App from './App';
 
 describe('App', () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
   test('renders home component with title', () => {
     render(<App />);
     const homeTitleElement = screen.getByText(/home component/i);

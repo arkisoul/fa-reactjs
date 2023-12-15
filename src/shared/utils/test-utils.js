@@ -12,7 +12,14 @@ function renderWithProviders(
   {
     preloadedState = {},
     // Automatically create a store instance if no store was passed in
-    store = configureStore({ reducer: { auth: authReducer, todo: todoReducer }, preloadedState }),
+    store = configureStore(
+      {
+        reducer: {
+          todo: todoReducer,
+          auth: authReducer,
+        }, preloadedState
+      }
+    ),
     ...renderOptions
   } = {}
 ) {

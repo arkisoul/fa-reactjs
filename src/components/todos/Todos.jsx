@@ -14,6 +14,7 @@ function Todos() {
   const compRef = useRef();
   const dispatch = useDispatch();
   const todoState = useSelector((state) => state.todo);
+  console.log("reduxState", todoState);
 
   const fetchTodos = useCallback(async () => {
     dispatch(fetchTodoList());
