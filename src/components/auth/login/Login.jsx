@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { AuthHoc } from "../../../shared/hoc/auth.hoc";
 import { loginUser } from "../../../app/auth/auth";
 
-function LoginComponent({
+export function LoginComponent({
   handleEmailChange,
   handlePasswordChange,
   handleAuthSubmit,
@@ -58,6 +58,7 @@ function LoginComponent({
           <button
             type="submit"
             className="btn btn-primary"
+            name="login"
             disabled={
               errors.email.required ||
               errors.email.email ||

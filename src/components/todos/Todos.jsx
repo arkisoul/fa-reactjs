@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { TodoItem } from "../todo-item/TodoItem";
 import { AddTodo } from "../add-todo/AddTodo";
-import { TodosContext } from "./TodosContext";
 import {
   fetchTodoList,
   createATodo,
@@ -47,25 +46,19 @@ function Todos() {
 
   return (
     <div className="todos">
-      <TodosContext.Provider
-        value={{
-          todos: todoState.todos,
-        }}
-      >
-        <h1 className="heading">Todos</h1>
-        <AddTodo onAddTodo={handleAddTodo} />
-        <ul className="todos-list">
-          {todoState.todos.map((todo) => (
-            <TodoItem
-              key={todo.id}
-              todo={todo}
-              handleDelete={onHandleDelete}
-              handleStatusChange={onStatusChange}
-              ref={compRef}
-            />
-          ))}
-        </ul>
-      </TodosContext.Provider>
+      <h1 className="heading">Todos</h1>
+      <AddTodo onAddTodo={handleAddTodo} />
+      <ul className="todos-list">
+        {todoState.todos.map((todo) => (
+          <TodoItem
+            key={todo.id}
+            todo={todo}
+            handleDelete={onHandleDelete}
+            handleStatusChange={onStatusChange}
+            ref={compRef}
+          />
+        ))}
+      </ul>
     </div>
   );
 }

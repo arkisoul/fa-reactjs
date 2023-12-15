@@ -2,8 +2,8 @@ import { createSlice } from '@reduxjs/toolkit';
 import { AuthService } from '../../services/AuthService';
 
 const initialState = {
-  user: null,
-  isAuthenticated: false,
+  user: JSON.parse(localStorage.getItem('user')),
+  isAuthenticated: Boolean(localStorage.getItem('authToken')),
   error: null,
   isFetching: false,
 }

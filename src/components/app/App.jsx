@@ -2,7 +2,6 @@ import React, { Component, lazy, Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
 import { connect } from "react-redux";
 import { LayoutMain } from "../layout/LayoutMain";
-// import Todos from "../todos/Todos";
 import { Logout } from "../auth/logout/Logout";
 import "./App.css";
 
