@@ -81,3 +81,5 @@ After the GitHub Actions workflow has run successfully, your app should be publi
 Make sure to review the logs of the GitHub Actions workflow if the deployment does not work as expected. You might need to adjust certain configurations based on specific requirements for your project.
 
 Lastly, remember that it can sometimes take a few minutes for your app to become accessible after deployment due to CDN caching and propagation delays.
+
+**Note** Take care of repo permissions for action bot
