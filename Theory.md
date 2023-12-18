@@ -71,3 +71,7 @@ UI/Component -> Events -> Dispatched (Actions) -> Reducers -> State (store) -> U
   `npm install react-redux redux-toolkit`
 
 - High Order Component (HoC)
+
+## Deployment
+
+- `npm run build`
