@@ -1,0 +1,2 @@
+.todo-item{align-items:center;background-color:#fff;border-bottom:1px solid #dbdbdb;display:flex;gap:.5rem}.todo-item>span{display:flex;flex:1 1 100%;font-size:.875rem;justify-content:space-between;padding:1em .75em}.todo-item>span.completed{text-decoration:line-through}.todo-item>label{padding:1em .75em}.todo-item>button{align-self:stretch}.todo-date{align-self:flex-end;color:#999;flex:0 0 auto;font-size:.7rem;justify-self:flex-end}
+/*# sourceMappingURL=832.7524aec7.chunk.css.map*/
